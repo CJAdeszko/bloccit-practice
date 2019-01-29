@@ -95,7 +95,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
 
-  # POSTS_CONTROLLER#EDIT ACTION TESTS
+  # POSTS_CONTROLLER#UPDATE ACTION TESTS
   describe 'PUT #update' do
     it 'updates post with the expected attributes' do
       new_title = RandomData.random_sentence #create new title for updated_post
