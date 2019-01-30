@@ -1,0 +1,22 @@
+<h1>Create a new Sponsored Post</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <%= form_for [@topic, @sponsored_post] do |s| %>
+      <div class="form-group">
+        <%= s.label :title %>
+        <%= s.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= s.label :body %>
+        <%= s.text_area :body, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= s.label :price %>
+        <%= s.number_field :price, in: 1..501, class: 'form-control' %>
+      </div>
+
+      <%= s.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

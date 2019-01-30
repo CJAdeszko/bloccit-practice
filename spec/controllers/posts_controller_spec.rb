@@ -88,8 +88,10 @@ RSpec.describe PostsController, type: :controller do
     it 'updates post with the expected attributes' do
       new_title = RandomData.random_sentence #create new title for updated_post
       new_body = RandomData.random_paragraph #create new body for updated_post
+
       put :update, params: { topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body} } #update the content of my_post using #update controller action
       updated_post = assigns(:post) #assigns @post to updated_post
+
       expect(updated_post.id).to eq(my_post.id)
       expect(updated_post.title).to eq(new_title)
       expect(updated_post.body).to eq(new_body)

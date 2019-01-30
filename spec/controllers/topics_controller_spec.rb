@@ -127,7 +127,7 @@ RSpec.describe TopicsController, type: :controller do
 
     it 'redirects to the topics index' do
       delete :destroy, params: { id: my_topic.id }
-      expect(response).to redirect_to(topics_path)
+      expect(response).to redirect_to(:index)
     end
   end
 
