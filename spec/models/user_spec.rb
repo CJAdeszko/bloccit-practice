@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email) }
   it { is_expected.to validate_length_of(:email).is_at_least(3) }
-  it { is_expected.to allow_value("user@test.com").for(:email) }
+  it { is_expected.to allow_value('user@test.com').for(:email) }
 
   #Shoulda tests for password
   it { is_expected.to validate_presence_of(:password) }
@@ -37,5 +37,14 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
   end
-  
+
+  describe 'format_name' do
+    let(:new_user) { User.new(name: 'test user', email: 'user@test.com', password: 'password') }
+
+    it 'should capitalize the first letter of the user first and last name' do
+      new_user.save
+      expect(new_user.name).to eq('Test User')
+    end
+  end
+
 end
