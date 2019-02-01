@@ -19,5 +19,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def confirm
+    @user = User.new
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+  end
 
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation) #specify which parameters can be seen by the view
+  end
+
+  helper_method :user_params #make user_params available in the view
 end
