@@ -11,6 +11,7 @@ RSpec.describe UsersController, type: :controller do
     }
   end
 
+
   describe 'GET #new' do
     it 'returns http success' do
       get :new
@@ -23,6 +24,7 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+
   describe 'POST #create' do
     it 'returns an http redirect' do
       post :create, params: { user: new_user_attributes }
@@ -30,7 +32,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'creates a new user' do
-      expect { post :create, params: { user: new_user_attributes } }.to change(User, :count).by(1)  
+      expect { post :create, params: { user: new_user_attributes } }.to change(User, :count).by(1)
     end
 
     it 'set user name properly' do
@@ -51,6 +53,11 @@ RSpec.describe UsersController, type: :controller do
     it 'sets user password_confirmation properly' do
       post :create, params: { user: new_user_attributes }
       expect(assigns(:user).password_confirmation).to eq(new_user_attributes[:password_confirmation])
+    end
+
+    it 'logs the user in after sign up' do
+      post :create, params: { user: new_user_attributes }
+      expect(session[:user_id]).to eq(assigns(:user).id) 
     end
   end
 
