@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { User.create!(name: 'Test User', email: 'user@test.com', password: 'Password') }
 
+  it { is_expected.to have_many(:posts) }
+  
   #Shoulda tests for name
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_least(1) }
@@ -37,5 +39,5 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
   end
-  
+
 end
