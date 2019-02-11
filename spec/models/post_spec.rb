@@ -12,6 +12,9 @@ RSpec.describe Post, type: :model do
   let(:user)  { User.create!(name: "Test", email: "test@bloccit.com", password: "password" ) }
   let(:post) { topic.posts.create!(title: title, body: body, user: user) }
 
+  #Confirm relationship with Comments
+  it { is_expected.to have_many(:comments) }
+  
   #Confirm relationship to Topic
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
