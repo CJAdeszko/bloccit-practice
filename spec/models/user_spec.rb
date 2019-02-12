@@ -19,9 +19,12 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:password) }
   it { is_expected.to have_secure_password }
   it { is_expected.to validate_length_of(:password).is_at_least(6) }
-  
+
   #Confirm relationship with Comments
   it { is_expected.to have_many(:comments) }
+
+  #Confirm relationship with Votes
+  it {is_expected.to have_many(:votes) }
 
   #ATTRIBUTE TESTS
   describe 'attributes' do
