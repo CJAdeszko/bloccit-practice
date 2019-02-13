@@ -26,6 +26,9 @@ RSpec.describe User, type: :model do
   #Confirm relationship with Votes
   it {is_expected.to have_many(:votes) }
 
+  #Confirm relationship with Favorites
+  it { is_expected.to have_many(:favorites) }
+
   #ATTRIBUTE TESTS
   describe 'attributes' do
     it 'has name and email attributes' do
@@ -91,6 +94,23 @@ RSpec.describe User, type: :model do
       it 'returns true for #admin?' do
         expect(user.admin?).to be_truthy
       end
+    end
+  end
+
+  #FAVORITE_FOR(POST) TESTS
+  describe "#favorite_for(post)" do
+    before do
+      topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
+      @post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+    end
+
+    it "returns nil if the user has not favorited the post" do
+      expect(user.favorite_for(@post)).to be_nil
+    end
+
+    it "returns the appropriate favorite if it exists" do
+      favorite = user.favorites.where(post: @post).create
+      expect(user.favorite_for(@post)).to eq(favorite)
     end
   end
 

@@ -22,6 +22,9 @@ RSpec.describe Post, type: :model do
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
 
+  #Confirm relationship with Favorites
+  it { is_expected.to have_many(:favorites) }
+
   #Validate presence of attributes
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_presence_of(:body) }

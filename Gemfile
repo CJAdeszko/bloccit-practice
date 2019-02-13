@@ -75,3 +75,5 @@ gem 'bootstrap-sass'
 
 #bcrypt for encrypting passwords
 gem 'bcrypt'
+
+gem 'figaro', '~> 1.1', '>= 1.1.1'
