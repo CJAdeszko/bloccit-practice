@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  after_create :create_vote
   belongs_to :topic
   belongs_to :user
   has_many :comments, dependent: :destroy
@@ -27,5 +28,11 @@ class Post < ApplicationRecord
     age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds #divide the number of seconds difference between post creation and epoch (1/1/1970) by the number of seconds in a day = age in days
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
+  end
+
+  private
+
+  def create_vote
+    user.votes.create(value: 1, post: self)
   end
 end
